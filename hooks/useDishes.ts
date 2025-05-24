@@ -13,7 +13,6 @@ export const useDishes = (restaurantId: number) => {
     setLoading(true);
     try {
       const res = await apiClient.get(`/restaurants/${restaurantId}/dishes`);
-      console.log("res", res);
       setDishes(res.data);
     } catch (err) {
       message.error("Error");

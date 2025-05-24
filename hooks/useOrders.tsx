@@ -74,7 +74,6 @@ export const useOrders = () => {
     const updateOrderStatus = async (id: number, values: Partial<any>) => {
         try {
             const cleanedValues = cleanFormValues(values);
-            console.log('cleanedValues', cleanedValues)
             await apiClient.patch(`/orders/${id}/status/`, cleanedValues);
             message.success('Order updated successfully');
             return true;

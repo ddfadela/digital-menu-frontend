@@ -1,12 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-// types/next-auth.d.ts
-import { DefaultSession } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import { NextAuthOptions } from "next-auth";
 
 declare module "next-auth" {
-  interface Session extends DefaultSession {
+  interface Session {
     accessToken?: string;
     user: {
       id?: string;
@@ -25,7 +23,8 @@ declare module "next-auth/jwt" {
     userId?: string;
   }
 }
-const handler = NextAuth({
+
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -33,9 +32,13 @@ const handler = NextAuth({
     }),
 
     CredentialsProvider({
-      name: "Credentials",
+      name: "Sign in",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "example@example.com",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -44,26 +47,32 @@ const handler = NextAuth({
         }
 
         try {
+          console.log("we will call backend urlfor login");
           const res = await fetch(`${process.env.NEST_API}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
           });
 
           const user = await res.json();
 
           if (res.ok && user.access_token) {
             return {
-              id: user.userId,
+              id: user.userId || user.id,
               email: credentials.email,
+              name: user.name,
               accessToken: user.access_token,
             };
           }
+
+          return null;
         } catch (error) {
           console.error("Authentication error:", error);
+          return null;
         }
-
-        return null;
       },
     }),
   ],
@@ -74,6 +83,7 @@ const handler = NextAuth({
 
   pages: {
     signIn: "/auth/login",
+    error: "/auth/error",
   },
 
   callbacks: {
@@ -110,22 +120,21 @@ const handler = NextAuth({
     },
 
     async session({ session, token }) {
-      // Type assertion to work around TypeScript issues
-      const extendedSession = session as typeof session & {
-        accessToken?: string;
-      };
-
       if (token.accessToken) {
-        extendedSession.accessToken = token.accessToken;
+        session.accessToken = token.accessToken;
       }
 
       if (session.user && token.userId) {
         session.user.id = token.userId;
       }
 
-      return extendedSession;
+      return session;
     },
   },
-});
+
+  debug: process.env.NODE_ENV === "development",
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
