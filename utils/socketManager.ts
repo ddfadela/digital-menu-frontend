@@ -7,7 +7,10 @@ class SocketManager {
 
   connect() {
     if (!this.socket) {
-      this.socket = io(process.env.NEXT_PUBLIC_NEST_API);
+      this.socket = io(
+        process.env.NEXT_PUBLIC_NEST_API ||
+          "https://digital-menu-backend-qqek.onrender.com"
+      );
 
       this.socket.on("newPendingOrder", () => {
         notification.open({

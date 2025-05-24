@@ -2,7 +2,6 @@ import axios from "axios";
 import { getSession } from "next-auth/react";
 
 const ApiClient = () => {
-  console.log("API Base URL:", process.env.NEXT_PUBLIC_NEST_API);
   const defaultOptions = {
     baseURL:
       process.env.NEXT_PUBLIC_NEST_API ||
