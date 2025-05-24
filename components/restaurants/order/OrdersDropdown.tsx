@@ -30,11 +30,15 @@ export const OrdersDropdown: React.FC = () => {
     };
 
     const calculateOrderTotal = (order: any): number => {
-        return order.items.reduce((total: any, item: any) => {
-            const itemTotal = (item.dish.price || 0) * (item.quantity || 0);
+        if (!order.items || !Array.isArray(order.items)) {
+            return 0;
+        }
+        return order.items.reduce((total: number, item: any) => {
+            const itemTotal = (item.dish?.price || 0) * (item.quantity || 0);
             return total + itemTotal;
         }, 0);
     };
+
 
     const handleOrderClick = (order: any) => {
         setSelectedOrder(order);

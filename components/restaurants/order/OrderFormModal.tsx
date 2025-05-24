@@ -12,8 +12,8 @@ import {
 
 import '@ant-design/v5-patch-for-react-19';
 import { OrderRequest } from '@/types/order';
-import { useOrders } from '@/hooks/useOrders';
 import { PhoneOutlined } from '@ant-design/icons';
+import { useOrdersUser } from '@/hooks/useOrdersUser';
 
 const { Title, Text } = Typography;
 
@@ -37,7 +37,7 @@ export const OrderFormModal: React.FC<OrderFormModalProps> = ({
     getTotalPrice,
 }) => {
     const [form] = Form.useForm();
-    const { submitOrder, submitting } = useOrders();
+    const { submitOrder, submitting } = useOrdersUser();
 
     const handleConfirmOrder = async () => {
         try {
@@ -71,6 +71,19 @@ export const OrderFormModal: React.FC<OrderFormModalProps> = ({
             }
         } catch (err) {
         }
+    };
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let value = e.target.value.replace(/\D/g, '');
+
+        if (value.length > 0 && !value.startsWith('213')) {
+            if (value.length <= 9) {
+                value = `+213${value}`;
+            }
+        } else if (value.startsWith('213') && value.length <= 12) {
+            value = `+${value}`;
+        }
+
+        form.setFieldValue('phoneNumber', value);
     };
 
     return (
@@ -123,6 +136,7 @@ export const OrderFormModal: React.FC<OrderFormModalProps> = ({
                 >
                     <Input
                         prefix={<PhoneOutlined />}
+                        onChange={handlePhoneChange}
                         placeholder="+213XXXXXXXXX"
                         maxLength={13}
                     />

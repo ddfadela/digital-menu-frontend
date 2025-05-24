@@ -19,7 +19,6 @@ import { CartItem, Dish } from '@/types/dish';
 import { useMenu } from '@/hooks/useMenu';
 import { CartModal } from '@/components/restaurants/menu/CartModal';
 import { Order } from '@/types/order';
-import { useOrdersStorage } from '@/hooks/useOrdersStorage';
 import { OrdersDropdown } from '@/components/restaurants/order/OrdersDropdown';
 import { OrderFormModal } from '@/components/restaurants/order/OrderFormModal';
 
@@ -66,10 +65,10 @@ export default function Page({
     };
 
     const getTotalPrice = (): number =>
-        cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        (cart ?? []).reduce((total, item) => total + item.price * item.quantity, 0);
 
     const getTotalItems = (): number =>
-        cart.reduce((total, item) => total + item.quantity, 0);
+        (cart ?? []).reduce((total, item) => total + item.quantity, 0);
 
     if (loading) {
         return (
