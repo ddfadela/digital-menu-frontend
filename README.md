@@ -77,4 +77,4 @@ Admins receive:
 
 ### 6. Feedback System
 
-- Customers can review their past orders whe he see his orders that is accepted
+- Customers can leave comment and rate (vote) the dishe from their past orders once the orders have been accepted.
