@@ -6,9 +6,16 @@ const { Title, Text } = Typography;
 interface Props {
     onSelect: (restaurant: any) => void;
 }
+interface Props {
+    onSelect: (restaurant: any) => void;
+}
 
 const RestaurantSelector = ({ onSelect }: Props) => {
     const { restaurants, loading } = useRestaurants();
+
+    if (!restaurants) {
+        return <div>No restaurants found.</div>;
+    }
 
     return (
         <div>

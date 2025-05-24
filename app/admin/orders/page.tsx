@@ -40,7 +40,11 @@ const RestaurantPage = () => {
             ),
         },
     ];
-
+    if (!orders) {
+        return {
+            notFound: true,
+        }
+    }
 
     return (
         <div className="p-6">

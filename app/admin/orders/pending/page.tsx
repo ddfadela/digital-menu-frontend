@@ -37,6 +37,11 @@ const Page = () => {
             message.error('Error when updating order status');
         }
     };
+    if (!pendingOrders) {
+        return {
+            notFound: true,
+        }
+    }
 
     return (
         <div style={{ padding: 24 }}>

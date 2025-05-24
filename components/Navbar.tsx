@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
 
     const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
         if (key === 'logout') {
-            signOut({ callbackUrl: '/login' });
+            signOut({ callbackUrl: '/auth/login' });
         }
     };
 

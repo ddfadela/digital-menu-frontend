@@ -17,6 +17,11 @@ const Page = () => {
         toggleRestaurantStatus,
     } = useRestaurants();
 
+    if (!restaurants) {
+        return {
+            notFound: true,
+        }
+    }
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingRestaurant, setEditingRestaurant] = useState<Restaurant | null>(null);
 
