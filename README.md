@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Digital Menu Application
+
+A scalable Digital Menu Application built with NestJS backend and Next.js frontend, containerized with Docker for easy development and deployment.
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ddfadela/digital-menu-frontend.git
+cd digital-menu-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Environment Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy the example environment file and configure your variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env
+```
 
-## Learn More
+### 3. Quick Start with Docker
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker-compose up -d --build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application will be available at:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend**: `http://localhost:3000`
 
-## Deploy on Vercel
+### 4. Manual Setup (Without Docker)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm run start
+```
+
+## Application Flow
+
+### 1. Admin Panel
+
+Access the admin dashboard at:
+
+http://localhost:3000/admin
+Register or login as an admin.
+
+### 2. Create and Manage Restaurant
+
+After logging in, the admin can:
+
+- Create one or more restaurants
+- Add menu categories (e.g., Starters, Mains, Desserts)
+- Add dishes under each category
+
+### 3. View QR Code
+
+Once a restaurant is created, a QR code is generated and can be viewed at:
+
+http://localhost:3000/qr/:restaurantId
+Scanning the QR code redirects the user to:
+Scanning the QR code redirects the user to:
+http://localhost:3000/:restaurantId
+
+### 4. Customer Experience
+
+Customers access the digital menu via the QR code:
+
+- Browse categories and dishes
+- Place orders directly from the menu page
+
+### 5. Real-Time Order Notifications
+
+Admins receive:
+
+- Instant WebSocket-based notifications for each new pending order
+- Notifications appear in the admin dashboard for real-time order management
+
+### 4. Customer Experience
+
+Customers access the digital menu via the QR code:
+
+- Browse categories and dishes
+- Place orders directly from the menu page
+- View order history with status tracking
+- For completed orders:
+  - Rate the experience (1-5 stars)
+  - Add comments/feedback
+  - Vote for favorite dishes from their orders
+
+### 5. Real-Time Order Notifications
+
+Admins receive:
+
+- Instant WebSocket-based notifications for each new pending order
+- Notifications appear in the admin dashboard for real-time order management
+- Aggregated customer feedback and ratings
+- Popular dishes based on customer votes
+
+### 6. Feedback System
+
+- Customers can review their past orders whe he see his orders that is accepted
