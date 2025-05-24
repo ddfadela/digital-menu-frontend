@@ -58,8 +58,6 @@ After logging in, the admin can:
 
 Once a restaurant is created, a QR code is generated and can be viewed at:
 
-http://localhost:3000/qr/:restaurantId
-Scanning the QR code redirects the user to:
 Scanning the QR code redirects the user to:
 http://localhost:3000/:restaurantId
 
@@ -85,9 +83,8 @@ Customers access the digital menu via the QR code:
 - Place orders directly from the menu page
 - View order history with status tracking
 - For completed orders:
-  - Rate the experience (1-5 stars)
+  - Vote the experience (1-5 stars)
   - Add comments/feedback
-  - Vote for favorite dishes from their orders
 
 ### 5. Real-Time Order Notifications
 
@@ -95,8 +92,6 @@ Admins receive:
 
 - Instant WebSocket-based notifications for each new pending order
 - Notifications appear in the admin dashboard for real-time order management
-- Aggregated customer feedback and ratings
-- Popular dishes based on customer votes
 
 ### 6. Feedback System
 
