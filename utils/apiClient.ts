@@ -4,7 +4,9 @@ import { getSession } from "next-auth/react";
 const ApiClient = () => {
   console.log("API Base URL:", process.env.NEXT_PUBLIC_NEST_API);
   const defaultOptions = {
-    baseURL: process.env.NEXT_PUBLIC_NEST_API,
+    baseURL:
+      process.env.NEXT_PUBLIC_NEST_API ||
+      "https://digital-menu-backend-qqek.onrender.com",
   };
 
   const instance = axios.create(defaultOptions);
