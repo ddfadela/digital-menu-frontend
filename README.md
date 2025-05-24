@@ -86,13 +86,6 @@ Customers access the digital menu via the QR code:
   - Vote the experience (1-5 stars)
   - Add comments/feedback
 
-### 5. Real-Time Order Notifications
-
-Admins receive:
-
-- Instant WebSocket-based notifications for each new pending order
-- Notifications appear in the admin dashboard for real-time order management
-
 ### 6. Feedback System
 
 - Customers can review their past orders whe he see his orders that is accepted
