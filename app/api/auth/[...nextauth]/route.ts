@@ -48,14 +48,17 @@ const authOptions: NextAuthOptions = {
 
         try {
           console.log("we will call backend urlfor login");
-          const res = await fetch(`${process.env.NEST_API}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: credentials.email,
-              password: credentials.password,
-            }),
-          });
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_NEST_API}/auth/login`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: credentials.email,
+                password: credentials.password,
+              }),
+            }
+          );
 
           const user = await res.json();
 
@@ -97,14 +100,17 @@ const authOptions: NextAuthOptions = {
       // Handle Google login
       if (account?.provider === "google" && profile?.email) {
         try {
-          const res = await fetch(`${process.env.NEST_API}/auth/google-login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: profile.email,
-              name: profile.name,
-            }),
-          });
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_NEST_API}/auth/google-login`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: profile.email,
+                name: profile.name,
+              }),
+            }
+          );
 
           const data = await res.json();
           if (res.ok && data.access_token) {

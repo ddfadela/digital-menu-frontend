@@ -3,7 +3,7 @@ import { getSession } from "next-auth/react";
 
 const ApiClient = () => {
   const defaultOptions = {
-    baseURL: process.env.NEST_API,
+    baseURL: process.env.NEXT_PUBLIC_NEST_API,
   };
 
   const instance = axios.create(defaultOptions);

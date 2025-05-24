@@ -15,13 +15,16 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const response = await fetch(`${process.env.NEST_API}/users/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_NEST_API}/users/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      }
+    );
 
     const text = await response.text();
 
