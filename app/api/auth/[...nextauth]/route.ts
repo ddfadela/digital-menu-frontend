@@ -27,7 +27,7 @@ const handler = NextAuth({
         if (res.ok && user.access_token) {
           return {
             id: user.userId,
-            email: credentials.email,
+            email: credentials?.email,
             accessToken: user.access_token,
           };
         }
@@ -45,12 +45,6 @@ const handler = NextAuth({
 
   callbacks: {
     async jwt({ token, account, user, profile }) {
-      // From credentials login
-      if (user?.accessToken) {
-        token.accessToken = user.accessToken;
-        token.userId = user.id;
-      }
-
       // From Google login
       if (account?.provider === "google") {
         try {
@@ -73,12 +67,6 @@ const handler = NextAuth({
       }
 
       return token;
-    },
-
-    async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      session.user.id = token.userId;
-      return session;
     },
   },
 });

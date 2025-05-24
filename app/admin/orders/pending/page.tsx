@@ -34,7 +34,7 @@ const Page = () => {
     const handleStatusChange = async (id: number, status: OrderStatus) => {
         const success = await updateOrderStatus(id, { status });
         if (!success) {
-            message.error('Échec de la mise à jour du statut de la commande');
+            message.error('Error when updating order status');
         }
     };
 
