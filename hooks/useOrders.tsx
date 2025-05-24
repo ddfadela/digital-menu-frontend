@@ -33,21 +33,13 @@ export const useOrders = () => {
                     }
                 }
 
-                // Add new order ID to the beginning of the list
                 ordersList.unshift(order.id);
-
-                // Keep only the last 20 orders (optional limit)
                 ordersList = ordersList.slice(0, 20);
-
-                // Remove duplicates (in case of any)
                 ordersList = [...new Set(ordersList)];
-
-                // Save updated list back to localStorage
                 localStorage.setItem('userOrders', JSON.stringify(ordersList));
 
             } catch (storageError) {
                 console.warn('Failed to save order ID to localStorage:', storageError);
-                // Continue execution even if localStorage fails
             }
 
 

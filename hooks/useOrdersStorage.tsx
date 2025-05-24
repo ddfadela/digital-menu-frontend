@@ -21,7 +21,6 @@ export const useOrdersStorage = () => {
             setLoading(true);
             setError(null);
 
-            // Get order IDs from localStorage
             const existingOrders = localStorage.getItem('userOrders');
             if (!existingOrders) {
                 setOrders([]);
@@ -52,7 +51,6 @@ export const useOrdersStorage = () => {
 
             setOrders(validOrders);
 
-            // Clean up localStorage to remove IDs of orders that no longer exist
             const validOrderIds = validOrders.map(order => order.id);
             if (validOrderIds.length !== orderIds.length) {
                 localStorage.setItem('userOrders', JSON.stringify(validOrderIds));

@@ -5,7 +5,6 @@ import apiClient from "@/utils/apiClient";
 import { message } from "antd";
 import React, { useState } from "react";
 
-// Custom hook for menu data
 export const useMenu = (restaurantId: number) => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);

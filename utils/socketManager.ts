@@ -7,7 +7,7 @@ class SocketManager {
 
   connect() {
     if (!this.socket) {
-      this.socket = io("http://localhost:3001");
+      this.socket = io(process.env.NEXT_PUBLIC_NEST_API);
 
       this.socket.on("newPendingOrder", () => {
         notification.open({
