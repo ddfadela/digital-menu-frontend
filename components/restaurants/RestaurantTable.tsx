@@ -18,6 +18,11 @@ const RestaurantTable = ({
 }: RestaurantTableProps) => {
     const columns = [
         {
+            title: 'ID',
+            dataIndex: 'id',
+            width: 150,
+        },
+        {
             title: 'Name',
             dataIndex: 'name',
             width: 150,

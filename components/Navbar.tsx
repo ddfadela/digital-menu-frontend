@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
 
                 <div className="text-xl font-bold hidden md:block">🍽 Digital Menu</div>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '1rem' }}>
+                <div className="flex justify-end p-4 gap-2">
                     <Tooltip title="Commandes en attente">
                         <Badge count={loadingPendingOrders ? '...' : pendingOrders.length} >
                             <Button shape="circle" icon={<BellOutlined />} />

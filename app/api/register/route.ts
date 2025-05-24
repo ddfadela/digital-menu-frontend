@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  const base_url =
+    process.env.NEXT_PUBLIC_NEST_API ||
+    "https://digital-menu-backend-qqek.onrender.com";
   if (!req)
     return NextResponse.json({ message: "No request" }, { status: 400 });
 
@@ -15,16 +18,13 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_NEST_API}/users/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
-      }
-    );
+    const response = await fetch(`${base_url}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
 
     const text = await response.text();
 
