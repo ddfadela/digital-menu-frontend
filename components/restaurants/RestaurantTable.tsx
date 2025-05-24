@@ -55,7 +55,6 @@ const RestaurantTable = ({
                 { text: 'Active', value: true },
                 { text: 'Inactive', value: false },
             ],
-            onFilter: (value: boolean | string, record: Restaurant) => record.isActive === value,
             render: (active: boolean, record: Restaurant) => (
                 <Switch
                     checked={active}
