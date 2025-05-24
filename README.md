@@ -75,17 +75,6 @@ Admins receive:
 - Instant WebSocket-based notifications for each new pending order
 - Notifications appear in the admin dashboard for real-time order management
 
-### 4. Customer Experience
-
-Customers access the digital menu via the QR code:
-
-- Browse categories and dishes
-- Place orders directly from the menu page
-- View order history with status tracking
-- For completed orders:
-  - Vote the experience (1-5 stars)
-  - Add comments/feedback
-
 ### 6. Feedback System
 
 - Customers can review their past orders whe he see his orders that is accepted
